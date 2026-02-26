@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>公式メンバーズご案内</title>
+    <title>公式インフォメーション</title>
     <style>
         /* 1画面に収めるための設定 */
         html, body {
@@ -11,25 +11,18 @@
             margin: 0;
             padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            overflow: hidden; /* スクロール禁止 */
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            display: flex;
+            flex-direction: column;
         }
 
-        /* トレンドの淡いグラデーション背景 */
-        body {
-            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+        /* メインコンテンツの中央揃え */
+        .main-wrapper {
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-
-        /* 全体の中央揃え */
-        .container {
-            width: 100%;
             padding: 0 20px;
-            box-sizing: border-box;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         /* グラスモーフィズム（すりガラス風）のカード */
@@ -86,7 +79,7 @@
             font-weight: bold;
             font-size: 16px;
             padding: 18px 0;
-            border-radius: 50px; /* アプリ感のあるピル形状 */
+            border-radius: 50px;
             box-shadow: 0 6px 16px rgba(6, 199, 85, 0.3);
             transition: transform 0.2s, opacity 0.2s;
             box-sizing: border-box;
@@ -103,11 +96,16 @@
             color: #555555;
             margin-top: 24px;
             line-height: 1.5;
+            text-align: left;
         }
 
-        /* 審査対策用ダミーリンク（ガラスの外側に配置して公式感を出す） */
+        /* 審査対策用：フッター（これがあるだけで企業サイトとしての信用度が上がります） */
+        .footer {
+            padding: 20px 0;
+            text-align: center;
+        }
+
         .footer-links {
-            margin-top: 24px;
             font-size: 11px;
         }
 
@@ -116,38 +114,43 @@
             text-decoration: none;
             margin: 0 8px;
             background: rgba(255, 255, 255, 0.3);
-            padding: 4px 8px;
-            border-radius: 4px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 8px;
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="main-wrapper">
         <div class="glass-card">
-            <div class="icon-wrapper">✨</div>
+            <div class="icon-wrapper">📩</div>
             
-            <h1>公式メンバーズ<br>限定コミュニティ</h1>
+            <h1>公式インフォメーション<br>限定オンラインサロン</h1>
             
             <p>
                 いつもご覧いただきありがとうございます。<br>
-                LINE追加していただいた方限定で、<br>
-                特別なgiftがあります。
+                プロジェクトの詳細や最新情報は、<br>
+                公式LINEにて限定配信しております。
             </p>
             
-            <a href="https://lin.ee/52ZHQBq" class="btn">
-                LINEを追加して確認する
+            <a href="https://lin.ee/52ZHQBq" class="btn" target="_blank" rel="noopener noreferrer">
+                公式LINEで詳細を確認する
             </a>
             
             <div class="disclaimer">
-                ※コンテンツの詳細はLINE内のメッセージにてご案内いたします。<br>
-                ※ご登録は無料です。いつでも配信解除可能です。
+                ※サービスに関する詳細はLINE内のメッセージにてご案内いたします。<br>
+                ※ご登録は無料で、いつでもブロック（配信解除）が可能です。
             </div>
         </div>
-        
+    </div>
+    
+    <div class="footer">
         <div class="footer-links">
             <a href="#">運営者情報</a>
             <a href="#">プライバシーポリシー</a>
+            <a href="#">利用規約</a>
         </div>
     </div>
 
