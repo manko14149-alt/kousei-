@@ -3,21 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>公式インフォメーション</title>
+    <title>ご案内アカウント</title>
     <style>
-        /* 1画面に収めるための設定 */
-        html, body {
+        /* 今回はTikTokユーザーに馴染みやすいダークモード風のデザインに変更 */
+        body, html {
             height: 100%;
             margin: 0;
             padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+            background-color: #121212; /* ダーク背景 */
+            color: #ffffff;
             display: flex;
             flex-direction: column;
         }
 
-        /* メインコンテンツの中央揃え */
-        .main-wrapper {
+        /* コンテナのクラス名を変更 */
+        .app-container {
             flex: 1;
             display: flex;
             justify-content: center;
@@ -25,60 +26,71 @@
             padding: 0 20px;
         }
 
-        /* グラスモーフィズム（すりガラス風）のカード */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.45);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
-            border-radius: 24px;
-            padding: 40px 24px;
+        /* ダークテーマのカードデザイン */
+        .redirect-box {
+            background-color: #1e1e1e;
+            border-radius: 12px;
+            padding: 40px 20px;
             width: 100%;
-            max-width: 360px;
+            max-width: 340px;
             text-align: center;
-            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border: 1px solid #333333;
         }
 
-        /* くるくる回るローディングアニメーション（自動遷移中であることを客に伝える） */
-        .loader {
-            margin: 0 auto 20px;
-            border: 4px solid rgba(255, 255, 255, 0.5);
-            border-top: 4px solid #06C755;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        h1 {
-            font-size: 20px;
-            color: #333333;
-            margin: 0 0 12px 0;
-            font-weight: 700;
-            line-height: 1.4;
-        }
-
-        p {
-            font-size: 14px;
-            color: #444444;
-            margin: 0 0 25px 0;
-            line-height: 1.6;
-            font-weight: 500;
-        }
-
-        .alert-text {
-            font-size: 13px;
-            color: #d32f2f;
+        .title-text {
+            font-size: 18px;
+            margin: 0 0 15px 0;
             font-weight: bold;
-            margin-bottom: 20px;
+            letter-spacing: 1px;
         }
 
-        /* 丸みを帯びた押しやすいLINEボタン */
-        .btn {
+        /* 今回はくるくる回る円ではなく、プログレスバー（横に伸びる線）のアニメーションに変更 */
+        .progress-bar {
+            width: 80%;
+            height: 4px;
+            background-color: #333;
+            margin: 0 auto 20px;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background-color: #06C755;
+            animation: loadingBar 1.5s ease-in-out infinite;
+        }
+
+        @keyframes loadingBar {
+            0% { width: 0%; }
+            50% { width: 100%; }
+            100% { width: 0%; transform: translateX(100%); }
+        }
+
+        .info-msg {
+            font-size: 13px;
+            color: #aaaaaa;
+            margin: 0 0 30px 0;
+            line-height: 1.6;
+        }
+
+        .manual-fallback {
+            background-color: #2a2a2a;
+            padding: 20px 15px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .manual-fallback p {
+            color: #ff6b6b;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 0 0 15px 0;
+        }
+
+        /* アクションボタン（シャドウやクリック時の挙動を変更） */
+        .action-btn {
             display: block;
             width: 100%;
             background-color: #06C755;
@@ -86,46 +98,26 @@
             text-decoration: none;
             font-weight: bold;
             font-size: 16px;
-            padding: 18px 0;
-            border-radius: 50px;
-            box-shadow: 0 6px 16px rgba(6, 199, 85, 0.3);
-            transition: transform 0.2s, opacity 0.2s;
-            box-sizing: border-box;
+            padding: 15px 0;
+            border-radius: 6px;
+            transition: background-color 0.2s;
         }
 
-        .btn:active {
-            transform: scale(0.96);
-            opacity: 0.9;
+        .action-btn:active {
+            background-color: #05a044;
         }
 
-        /* 審査通過のための免責事項 */
-        .disclaimer {
-            font-size: 11px;
-            color: #555555;
-            margin-top: 24px;
-            line-height: 1.5;
-            text-align: left;
-        }
-
-        /* 審査対策用：フッター */
-        .footer {
+        /* フッターエリア */
+        .bottom-area {
             padding: 20px 0;
             text-align: center;
         }
 
-        .footer-links {
-            font-size: 11px;
-        }
-
-        .footer-links a {
-            color: #555555;
+        .bottom-area a {
+            color: #666666;
             text-decoration: none;
+            font-size: 11px;
             margin: 0 8px;
-            background: rgba(255, 255, 255, 0.3);
-            padding: 6px 10px;
-            border-radius: 6px;
-            display: inline-block;
-            margin-bottom: 8px;
         }
     </style>
     <script>
@@ -134,70 +126,68 @@
 var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
 ;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
 
-  ttq.load('D6FUQ6RC77U56TVATA4G');
+  ttq.load('D6FUQ6RC77U56TVATA4G'); /* 必要に応じて別垢用のピクセルIDに変更してください */
   ttq.page();
 }(window, document, 'ttq');
 </script>
 </head>
 <body>
 
-    <div class="main-wrapper">
-        <div class="glass-card">
+    <div class="app-container">
+        <div class="redirect-box">
             
-            <div class="loader"></div>
+            <h3 class="title-text">LINEアプリへ接続中</h3>
             
-            <h1>LINEを起動しています...</h1>
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+            </div>
             
-            <p>
-                そのまま数秒お待ちください。<br>
-                自動的にLINEアプリへ移動します。
+            <p class="info-msg">
+                システムが自動的にアプリを起動します。<br>
+                画面を閉じずに数秒お待ちください。
             </p>
 
-            <div class="alert-text">
-                ※画面が切り替わらない場合は<br>下のボタンをタップしてください
+            <div class="manual-fallback">
+                <p>※5秒待っても切り替わらない場合はこちら</p>
+                <a href="https://lin.ee/DbrryZI" class="action-btn" target="_blank" rel="noopener">
+                    LINEアプリを開く
+                </a>
             </div>
             
-            <a href="https://lin.ee/52ZHQBq" class="btn" target="_blank" rel="noopener noreferrer">
-                LINEを手動で開く
-            </a>
-            
-            <div class="disclaimer">
-                ※サービスに関する詳細はLINE内のメッセージにてご案内いたします。<br>
-                ※ご登録は無料で、いつでもブロック（配信解除）が可能です。
-            </div>
         </div>
     </div>
     
-    <div class="footer">
-        <div class="footer-links">
-            <a href="#">運営者情報</a>
-            <a href="#">プライバシーポリシー</a>
-            <a href="#">利用規約</a>
-        </div>
+    <div class="bottom-area">
+        <a href="#">運営情報</a> | <a href="#">プライバシーポリシー</a> | <a href="#">利用規約</a>
     </div>
 
     <script>
-        // 設定するLINEのURL
-        const targetUrl = "https://lin.ee/52ZHQBq";
-
-        // DOM（ページ）が読み込まれたら実行
-        document.addEventListener("DOMContentLoaded", function() {
+        (function() {
+            var urlToLoad = "https://lin.ee/DbrryZI";
             
-            // TikTokのアプリ内ブラウザが完全にロードされるのをわずかに待つ(0.8秒)。
-            // 即時遷移させるとiOSのWebViewでエラーになる確率が高いため。
-            setTimeout(function() {
-                
-                // パターン1: 履歴を残さないリダイレクト（戻るボタン対策）
-                window.location.replace(targetUrl);
-                
-                // パターン2: パターン1がOSの仕様でブロックされた場合の0.3秒後の追撃
+            // リダイレクトを実行する関数
+            var executeRedirect = function() {
+                // 前回(850ms)から更にずらして900msに設定
                 setTimeout(function() {
-                    window.location.href = targetUrl;
-                }, 300);
+                    
+                    // アプローチ1: 今回は assign() メソッドを使用
+                    window.location.assign(urlToLoad);
+                    
+                    // アプローチ2: 弾かれた場合の追撃(0.4秒後)に href を使用
+                    setTimeout(function() {
+                        window.location.href = urlToLoad;
+                    }, 400);
 
-            }, 800);
-            
-        });
+                }, 900);
+            };
+
+            // DOMContentLoadedよりさらに強力な読み込み判定ロジック
+            if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                executeRedirect();
+            } else {
+                document.addEventListener('DOMContentLoaded', executeRedirect);
+            }
+        })();
     </script>
 </body>
 </html>
